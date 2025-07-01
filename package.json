@@ -1,0 +1,35 @@
+{
+  "name": "tabaco",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "directories": {
+    "test": "tests"
+  },
+  "scripts": {
+    "test": "playwright test --project=shop",
+    "report": "playwright show-report"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/julia-kramarenko/tabaco.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/julia-kramarenko/tabaco/issues"
+  },
+  "homepage": "https://github.com/julia-kramarenko/tabaco#readme",
+  "dependencies": {
+    "playwright": "^1.53.1"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.53.2",
+    "@types/node": "^24.0.8",
+    "@typescript-eslint/eslint-plugin": "^8.35.1",
+    "@typescript-eslint/parser": "^8.35.1",
+    "eslint": "^9.30.0",
+    "monocart-reporter": "^2.9.21"
+  }
+}
