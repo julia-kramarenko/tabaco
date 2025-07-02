@@ -1,9 +1,8 @@
 import { expect, Locator } from "@playwright/test";
-import { AppPage } from "../abstractClasses";
+import { AppPage, Component } from "../abstractClasses";
 import { step } from "../../misc/reporter/step";
 
-export class TopHeader extends AppPage {
-    public pagePath: string = '/';
+export class TopHeader extends Component {
     public container: Locator = this.page.getByTestId("header");
     public headerLinks: Locator = this.container.locator("[data-components='HeaderLinks']");
     public miniCartLink: Locator = this.headerLinks.getByTestId("miniCart");

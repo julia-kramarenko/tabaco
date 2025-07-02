@@ -33,5 +33,12 @@ module.exports = defineConfig({
         baseURL: "https://www.ploom.co.uk/en"
      },
     },
+    {
+      name: 'firefox-shop',
+      use: { 
+        browserName: 'firefox',
+        baseURL: "https://www.ploom.co.uk/en"
+     },
+    },
   ],
 });

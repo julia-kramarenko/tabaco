@@ -1,7 +1,5 @@
 import { test } from "@playwright/test";
-import { randomUUID } from "crypto";
 import { Application } from "../app";
-import { ShopDevicesPage } from "../app/pages/shopDevicesPage";
 import { DevicePage } from "../app/pages/devicePage";
 import { ShoppingCartPage } from "../app/pages/shoppingCart";
 
