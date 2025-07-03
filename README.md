@@ -31,34 +31,3 @@ To run such different browser in confg file there are different projects which c
 ```bash
 npm run report
 ```
-## 🛠 Custom Playwright Fixtures
-
-This project uses a custom Playwright test fixture `shopTest` defined in `tests/fixtures/shopTest.ts`. It extends the base Playwright test with additional context objects to simplify test writing for the e-commerce application.
-
-### 🔧 Custom Fixtures Available
-
-- `app: Application`  
-  Base application instance initialized with Playwright's `page`.
-
-- `devicePage: DevicePage`  
-  Navigates to a product device page (defaults to device SKU `ploom-x-advanced`).
-
-- `shoppingCart: ShoppingCartPage`  
-  Opens the shopping cart.
-
-- `testOptions.device: string`  
-  Allows configuring which device SKU to use in the test (default: `"ploom-x-advanced"`).
-
----
-
-### ▶️ Using the Fixture in Your Tests
-
-Import `shopTest` instead of the default `test`:
-
-```ts
-import { shopTest as test, expect } from '../fixtures/shopTest';
-
-test('can add device to cart', async ({ devicePage, shoppingCart }) => {
-  await devicePage.addToCart();
-  expect(await shoppingCart.getItemCount()).toBe(1);
-});

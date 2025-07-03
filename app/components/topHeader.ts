@@ -1,13 +1,19 @@
-import { expect, Locator } from "@playwright/test";
-import { AppPage, Component } from "../abstractClasses";
+import { expect, Locator, Page } from "@playwright/test";
+import { Component } from "../abstractClasses";
 import { step } from "../../misc/reporter/step";
 
 export class TopHeader extends Component {
-    public container: Locator = this.page.getByTestId("header");
-    public headerLinks: Locator = this.container.locator("[data-components='HeaderLinks']");
-    public miniCartLink: Locator = this.headerLinks.getByTestId("miniCart");
+    public container: Locator;
+    public headerLinks: Locator;
+    public miniCartLink: Locator;
+    constructor(page: Page) {
+        super(page);
+        this.container = this.page.getByTestId("header");
+        this.headerLinks = this.container.locator("[data-components='HeaderLinks']");
+        this.miniCartLink = this.headerLinks.getByTestId("miniCart");
+    }
 
-    @step()
+    @step("Expected loading header in the top of page")
     async expectLoaded(message = 'Expected header is visible'): Promise<void> {
         await expect(this.container, message).toBeVisible({ timeout: 5000 });
     }

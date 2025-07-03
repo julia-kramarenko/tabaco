@@ -1,20 +1,29 @@
 
-import { expect, Locator } from "@playwright/test";
+import { expect, Locator, Page } from "@playwright/test";
 import { step } from "../../misc/reporter/step";
 import { AppPage } from "../abstractClasses";
 import { TopHeader } from "../components/topHeader";
 
 export class ShopDevicesPage extends AppPage {
-    public pagePath: string = "/en/shop/products/devices";
-    public container: Locator = this.page.locator(".shop_catalogue_xf");
-    public products: Locator = this.page.locator('[data-product]');
+    public pagePath: string;
+    public container: Locator;
+    public products: Locator;
+    public topHeader: TopHeader;
+
+    constructor(page: Page) {
+        super(page);
+        this.pagePath  = "/en/shop/products/devices";
+        this.container = this.page.locator(".shop_catalogue_xf");
+        this.products = this.page.locator('[data-product]');
+        this.topHeader = new TopHeader(this.page);
+    }
+
     public deviceBySku = (device: string): Locator => {
         return this.page.locator(`[data-sku="${device}"]`);
     }
     public buyNowDeviceButton = (device: string): Locator => {
         return this.deviceBySku(device).locator("[class*='buyNow']");
     }
-    public topHeader: TopHeader = new TopHeader(this.page);
 
     @step("Expect Shop Device page is loaded")
     async expectLoaded(message = 'Expected Shop Device page is opened'): Promise<void> {

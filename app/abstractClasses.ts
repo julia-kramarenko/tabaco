@@ -7,21 +7,26 @@ export abstract class Component {
 }
 
 export abstract class AppPage extends Component {
+    public acceptCookiesButton: Locator;
+    public agesModal: Locator;
+    public confirmAgesButton: Locator;
+
+    constructor(page: Page) {
+        super(page);
+        this.acceptCookiesButton = this.page.locator('#onetrust-accept-btn-handler');
+        this.agesModal = this.page.locator(".modal__base");
+        this.confirmAgesButton = this.agesModal.getByTestId("customButton").getByText(" Yes, discover more ");
+    }
     public abstract pagePath: string;
     public abstract container: Locator;
-    public acceptCookiesButton: Locator = this.page.locator('#onetrust-accept-btn-handler');
-    public agesModal: Locator = this.page.locator(".modal__base");
-    public confirmAgesButton: Locator = this.agesModal.getByTestId("customButton").getByText(" Yes, discover more ");
 
     @step("Open new page, accept cookies and confirm 18 ages modal")
     async open(path?: string) {
         await this.page.goto(path ?? this.pagePath);
-        try {
-            await this.acceptCookiesButton.click({timeout:3000});
-            await this.confirmAgesButton.click({timeout:3000});
-        } catch (e) {
-            // element not found or not visible: skip
-        }     
+        if (await this.acceptCookiesButton.isVisible({ timeout: 5000 }))
+            await this.acceptCookiesButton.click();
+        if (await this.confirmAgesButton.isVisible({ timeout: 5000 }))
+            await this.confirmAgesButton.click({ timeout: 3000 });
         await this.expectLoaded();
     }
 }

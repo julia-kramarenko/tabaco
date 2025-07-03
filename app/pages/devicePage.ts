@@ -8,17 +8,21 @@ import { TopHeader } from "../components/topHeader";
 export class DevicePage extends AppPage {
     public container: Locator;
     public pagePath: string;
+    public readonly addToCartButton: Locator
     private readonly deviceSku: string;
+    public readonly checkoutButton: Locator;
+    private readonly productDetails:Locator;
+    public topHeader:TopHeader;
+
     constructor(page: Page, deviceSku: string) {
         super(page);
         this.page = page;
         this.deviceSku = deviceSku;
+        this.addToCartButton =  this.page.getByTestId("pdpAddToProduct");
+        this.checkoutButton = this.page.getByTestId("miniCartCheckoutButton");
+        this.productDetails = this.page.getByTestId("product-details");
+        this.topHeader = new TopHeader(this.page);
     }
-    
-    public topHeader:TopHeader = new TopHeader(this.page);
-    public readonly addToCartButton: Locator = this.page.getByTestId("pdpAddToProduct");
-    public readonly checkoutButton: Locator = this.page.getByTestId("miniCartCheckoutButton");
-    private readonly productDetails: Locator = this.page.getByTestId("product-details");
 
     @step("Expect Device page is loaded")
     async expectLoaded(message = 'Expected Shop Device page is opened'): Promise<void> {
